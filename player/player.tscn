@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://drx682vnll82g"]
+[gd_scene load_steps=20 format=3 uid="uid://drx682vnll82g"]
 
 [ext_resource type="Texture2D" uid="uid://jhv565q5ppcl" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Idle.png" id="1_6gf61"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_7710n"]
 [ext_resource type="Texture2D" uid="uid://c8bltfvdv6brf" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Walk.png" id="2_jt0er"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nic4"]
@@ -119,17 +120,13 @@ radius = 3.16228
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(357, 235)
+scale = Vector2(2, 2)
+script = ExtResource("1_7710n")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jdhmk")
-animation = &"walk"
-frame = 6
-frame_progress = 0.712261
-
-[node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
-zoom = Vector2(2, 2)
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g1hua")
