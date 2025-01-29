@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://drx682vnll82g"]
+[gd_scene load_steps=27 format=3 uid="uid://drx682vnll82g"]
 
 [ext_resource type="Texture2D" uid="uid://jhv565q5ppcl" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Idle.png" id="1_6gf61"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_7710n"]
 [ext_resource type="Texture2D" uid="uid://c8bltfvdv6brf" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Walk.png" id="2_jt0er"]
+[ext_resource type="Texture2D" uid="uid://v03d7m52asua" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Attack01.png" id="3_m82pd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nic4"]
 atlas = ExtResource("1_6gf61")
@@ -26,6 +27,30 @@ region = Rect2(400, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_of7vr"]
 atlas = ExtResource("1_6gf61")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vkpj"]
+atlas = ExtResource("3_m82pd")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw27q"]
+atlas = ExtResource("3_m82pd")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp8g3"]
+atlas = ExtResource("3_m82pd")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmtw7"]
+atlas = ExtResource("3_m82pd")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kndt"]
+atlas = ExtResource("3_m82pd")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw7kv"]
+atlas = ExtResource("3_m82pd")
 region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmx0j"]
@@ -87,6 +112,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1vkpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw27q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp8g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmtw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kndt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw7kv")
+}],
+"loop": true,
+"name": &"sword_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xmx0j")
 }, {
 "duration": 1.0,
@@ -118,15 +166,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1hua"]
 radius = 3.16228
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 position = Vector2(357, 235)
 scale = Vector2(2, 2)
+collision_layer = 3
 script = ExtResource("1_7710n")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jdhmk")
-animation = &"idle"
+animation = &"sword_attack"
+frame_progress = 0.7194
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g1hua")
