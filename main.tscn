@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://dnvrm2vwqnfyb"]
+[gd_scene load_steps=7 format=4 uid="uid://dnvrm2vwqnfyb"]
 
 [ext_resource type="PackedScene" uid="uid://dcodgnwufnm8c" path="res://world/layer_holder.tscn" id="1_1utne"]
 [ext_resource type="Texture2D" uid="uid://ckrjmort766ax" path="res://assests/Pixel Adventure 1/Free/Terrain/Terrain (16x16).png" id="1_cwnn0"]
 [ext_resource type="PackedScene" uid="uid://drx682vnll82g" path="res://player/player.tscn" id="2_fokds"]
+[ext_resource type="PackedScene" uid="uid://bmncyy7ed1ivm" path="res://enemy/OrcEnemy.tscn" id="4_bdjxw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0topn"]
 texture = ExtResource("1_cwnn0")
@@ -307,6 +308,9 @@ tile_map_data = PackedByteArray("AAAAABAAAAAGAAAAAAABABAAAAAHAAAAAAACABAAAAAHAAA
 tile_set = SubResource("TileSet_cg8j0")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_fokds")]
-position = Vector2(31, -13)
+position = Vector2(350, -16)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="OrcEnemy" parent="." instance=ExtResource("4_bdjxw")]
+position = Vector2(523, -15)
