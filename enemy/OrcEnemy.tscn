@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://bmncyy7ed1ivm"]
 
-[ext_resource type="Script" path="res://enemy/orc_enemy.gd" id="1_m55ch"]
+[ext_resource type="Script" path="res://scripts/orc_enemy.gd" id="1_m55ch"]
 [ext_resource type="Texture2D" uid="uid://b83nlf6asgw6p" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Attack01.png" id="2_g0lop"]
 [ext_resource type="Texture2D" uid="uid://cmvmcggcpepgp" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc with shadows/Orc-Death.png" id="2_s67yt"]
 [ext_resource type="Texture2D" uid="uid://bwnjltirvqc7r" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc with shadows/Orc-Idle.png" id="3_jxcaf"]
@@ -263,7 +263,11 @@ shape = SubResource("CircleShape2D_nm5gw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
 shape = SubResource("CircleShape2D_wyqdy")
 
+[node name="DMG_Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="DectectoinArea" to="." method="_on_dectectoin_area_body_entered"]
 [connection signal="body_exited" from="DectectoinArea" to="." method="_on_dectectoin_area_body_exited"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
+[connection signal="timeout" from="DMG_Cooldown" to="." method="_on_dmg_cooldown_timeout"]
