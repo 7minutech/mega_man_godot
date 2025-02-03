@@ -195,6 +195,17 @@ wait_time = 0.5
 
 [node name="DealATKTimer" type="Timer" parent="."]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0.5, 0)
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = -200
+limit_bottom = 72
+limit_smoothed = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="ATKCooldown" to="." method="_on_atk_cooldown_timeout"]
