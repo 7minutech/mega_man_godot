@@ -164,16 +164,17 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1hua"]
-radius = 6.0
+radius = 3.16228
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y0f2g"]
-radius = 6.47
+radius = 5.52268
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(359, 230)
+position = Vector2(357, 235)
 scale = Vector2(2, 2)
 collision_layer = 3
 script = ExtResource("1_7710n")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jdhmk")
@@ -183,13 +184,11 @@ frame_progress = 0.895633
 speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1)
 shape = SubResource("CircleShape2D_g1hua")
 
 [node name="player_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
-position = Vector2(0.5, 0)
 shape = SubResource("CircleShape2D_y0f2g")
 
 [node name="ATKCooldown" type="Timer" parent="."]

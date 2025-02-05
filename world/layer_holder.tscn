@@ -12,8 +12,11 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xq5ro"]
 texture = ExtResource("6_2wccw")
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:0/0 = 0
 8:0/0 = 0
 9:0/0 = 0
@@ -350,6 +353,7 @@ texture = ExtResource("6_2wccw")
 24:24/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_eawwi"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_xq5ro")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hthc"]
@@ -2166,3 +2170,5 @@ tile_set = SubResource("TileSet_xaq8n")
 [node name="Trees" type="TileMapLayer" parent="."]
 position = Vector2(12, 0)
 tile_set = SubResource("TileSet_kkjao")
+
+[node name="collisions" type="StaticBody2D" parent="."]
