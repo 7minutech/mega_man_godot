@@ -145,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eexci")
 }],
-"loop": false,
+"loop": true,
 "name": &"bow_attack",
 "speed": 5.0
 }, {

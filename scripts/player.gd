@@ -10,10 +10,13 @@ var alive = true
 var atk_ip = false
 var jump_velcoity = -400
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var arrow = preload("res://arrow.tscn")
+
 func _physics_process(delta: float):
 	player_movement(delta)
 	enemy_atk()
 	attack()
+	
 	if health <= 0:
 		health = 0
 		# end scren here 
@@ -105,14 +108,19 @@ func _on_atk_cooldown_timeout() -> void:
 
 func attack():
 	var dir = current_direction
-	if Input.is_action_just_pressed("Attack"):
+	if Input.is_action_just_pressed("sword_attack") or Input.is_action_just_pressed("bow_attack"):
 		Global.player_current_atk = true
 		atk_ip = true
 		if dir == "right":
 			$AnimatedSprite2D.flip_h = false
 		if dir == "left":
 			$AnimatedSprite2D.flip_h = true
-		$AnimatedSprite2D.play("sword_attack")
+		if Input.is_action_just_pressed("sword_attack"):
+			$AnimatedSprite2D.play("sword_attack")
+		if Input.is_action_just_pressed("bow_attack"):
+			$AnimatedSprite2D.play("bow_attack")
+			spawn_arrow()
+				
 		$DealATKTimer.start()
 			
 	
@@ -123,3 +131,12 @@ func _on_deal_atk_timer_timeout() -> void:
 	Global.player_current_atk = false
 	atk_ip = false
 	pass # Replace with function body.
+
+func spawn_arrow():
+	var arrow_obj = arrow.instantiate()
+	if current_direction == "right":
+		arrow_obj.rotation = 0
+	if current_direction == "left":
+		arrow_obj.rotation = PI
+	arrow_obj.global_position = $ArrowSpawn.global_position
+	add_child(arrow_obj)
