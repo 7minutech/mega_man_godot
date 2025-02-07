@@ -8,13 +8,8 @@ var enemy_atk_cd = true
 var health = 200
 var alive = true
 var atk_ip = false
-@export var jump_height : float = 300
-@export var jump_time_max : float = 0.8
-@export var jump_time_min : float = 0.4
-@onready var jump_velcoity : float = ((2.0 * jump_height) / (jump_time_max)) * -1.0
-@onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_max * jump_time_max)) * -1.0
-@onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_max * jump_time_max)) * -1.0
-
+var jump_velcoity = -400
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _physics_process(delta: float):
 	player_movement(delta)
 	enemy_atk()
@@ -30,15 +25,21 @@ func _ready():
 	$AnimatedSprite2D.play("idle")
 	
 func player_movement(delta):
-	velocity.y = get_my_gravity() * delta
+	#velocity.y = get_my_gravity() * delta
+	if not is_on_floor():
+		velocity.y += gravity * delta
 	if Input.is_action_pressed("right"):
 		current_direction = "right"
 		play_anim("walk")
 		velocity.x = speed
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			jump()
 	elif  Input.is_action_pressed("left"):
 		current_direction = "left"
 		play_anim("walk")
 		velocity.x = -speed
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			jump()
 	elif Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
 	else:
@@ -46,8 +47,9 @@ func player_movement(delta):
 		velocity.x = 0
 	move_and_slide()
 	
-func get_my_gravity() -> float:
-	return jump_gravity if velocity.y < 0.0 else fall_gravity
+#func get_my_gravity() -> float:
+	#return jump_gravity if velocity.y < 0.0 else fall_gravity
+	
 
 func jump():
 	velocity.y = jump_velcoity
