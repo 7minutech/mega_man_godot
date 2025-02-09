@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://dnvrm2vwqnfyb"]
+[gd_scene load_steps=8 format=4 uid="uid://dnvrm2vwqnfyb"]
 
 [ext_resource type="PackedScene" uid="uid://dcodgnwufnm8c" path="res://world/layer_holder.tscn" id="1_1utne"]
 [ext_resource type="Texture2D" uid="uid://ckrjmort766ax" path="res://assests/Pixel Adventure 1/Free/Terrain/Terrain (16x16).png" id="1_cwnn0"]
+[ext_resource type="Script" path="res://main.gd" id="1_t66vk"]
 [ext_resource type="PackedScene" uid="uid://drx682vnll82g" path="res://player/player.tscn" id="2_fokds"]
 [ext_resource type="PackedScene" uid="uid://bmncyy7ed1ivm" path="res://enemy/OrcEnemy.tscn" id="4_bdjxw"]
 
@@ -299,6 +300,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0topn")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_t66vk")
 
 [node name="LayerHolder" parent="." instance=ExtResource("1_1utne")]
 
@@ -314,3 +316,6 @@ position = Vector2(523, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(296, 72)
+
+[node name="FlyingTimer" type="Timer" parent="."]
+wait_time = 15.0

@@ -15,7 +15,8 @@ var arrow = preload("res://arrow.tscn")
 func _physics_process(delta: float):
 	player_movement(delta)
 	enemy_atk()
-	attack()
+	if velocity.x == 0:
+		attack()
 	
 	if health <= 0:
 		health = 0
@@ -118,9 +119,8 @@ func attack():
 		if Input.is_action_just_pressed("sword_attack"):
 			$AnimatedSprite2D.play("sword_attack")
 		if Input.is_action_just_pressed("bow_attack"):
-			$AnimatedSprite2D.play("bow_attack")
+			$AnimatedSprite2D.play("bow_attack", 4.0)
 			spawn_arrow()
-				
 		$DealATKTimer.start()
 			
 	
@@ -140,3 +140,14 @@ func spawn_arrow():
 		arrow_obj.rotation = PI
 	arrow_obj.global_position = $ArrowSpawn.global_position
 	add_child(arrow_obj)
+
+
+func _on_arrow_spawn_timer_timeout() -> void:
+	spawn_arrow()
+	$ArrowSpawnTimer.stop()
+	pass # Replace with function body.
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$AnimatedSprite2D.play("idle")
+	pass # Replace with function body.
