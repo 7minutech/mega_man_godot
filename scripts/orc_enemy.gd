@@ -4,14 +4,16 @@ extends CharacterBody2D
 var speed = 100
 var player_chase  = false
 var player = null
-var health = 100
+var health = 1000
 var player_in_atk_range = false
 var attack_ip = false
 var can_take_damage = true
 var taken_dmg = false
-
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _physics_process(delta: float):
 	deal_with_dmg()
+	if not is_on_floor():
+		velocity.y += gravity * delta
 	if taken_dmg:
 		$AnimatedSprite2D.modulate = Color.RED
 		await get_tree().create_timer(0.1).timeout

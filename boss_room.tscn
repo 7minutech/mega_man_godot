@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://cxogvslcrwmkj"]
+[gd_scene load_steps=9 format=4 uid="uid://cxogvslcrwmkj"]
 
 [ext_resource type="Texture2D" uid="uid://dnw1oaw8bsy06" path="res://assests/Hero's_Journey_Moon Graveyard/Final/Background_0.png" id="1_4k70k"]
 [ext_resource type="Texture2D" uid="uid://dxdiee5c4yetu" path="res://assests/Tiles/Tiles/Assets/Assets.png" id="1_lkr3p"]
 [ext_resource type="PackedScene" uid="uid://drx682vnll82g" path="res://player/player.tscn" id="2_n3ra5"]
+[ext_resource type="PackedScene" uid="uid://dg730267bs21d" path="res://enemy/BossEnemy.tscn" id="4_5q56n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_222hc"]
 texture = ExtResource("1_4k70k")
@@ -1628,3 +1629,6 @@ position = Vector2(508, -171)
 
 [node name="Player" parent="." instance=ExtResource("2_n3ra5")]
 position = Vector2(28, -17)
+
+[node name="BossEnemy" parent="." instance=ExtResource("4_5q56n")]
+position = Vector2(408, -80)

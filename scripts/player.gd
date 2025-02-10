@@ -176,6 +176,7 @@ func current_camera():
 		$WorldCamera.enabled = true
 		$BossCamera.enabled = false
 	if Global.current_scene == "boss":
+		$WorldCamera/ScoreLabel.hide()
 		$BossCamera.enabled = true 
 		$WorldCamera.enabled = false
 	
