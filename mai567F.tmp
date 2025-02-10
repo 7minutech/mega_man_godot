@@ -23,6 +23,12 @@ position = Vector2(678, -17)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(296, 72)
 
+[node name="ScoreLabel" type="Label" parent="Camera2D"]
+offset_left = -291.0
+offset_top = -182.0
+offset_right = -251.0
+offset_bottom = -159.0
+
 [node name="FlyingTimer" type="Timer" parent="."]
 wait_time = 15.0
 

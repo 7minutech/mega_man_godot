@@ -63,6 +63,7 @@ func deal_with_dmg():
 			can_take_damage = false
 			#print(health)
 			if (health <= 0):
+				Global.player_score += 1000
 				self.queue_free()
 
 func deal_range_dmg():

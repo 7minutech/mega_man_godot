@@ -13,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var arrow = preload("res://arrow.tscn")
 
 func _physics_process(delta: float):
+	$WorldCamera/ScoreLabel.text = "Score: " + str(Global.player_score)
 	player_movement(delta)
 	enemy_atk()
 	current_camera()
@@ -177,3 +178,4 @@ func current_camera():
 	if Global.current_scene == "boss":
 		$BossCamera.enabled = true 
 		$WorldCamera.enabled = false
+	

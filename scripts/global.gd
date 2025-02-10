@@ -9,6 +9,7 @@ var player_exit_clifside_posx = 0
 var player_exit_clifside_posy = 0
 var player_start_posx = 0
 var player_start_posy = 0
+var player_score =  0
 
 func finish_scene_change():
 	if transition_scene:

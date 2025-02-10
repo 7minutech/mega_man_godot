@@ -17,7 +17,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
-
 	queue_free()
 	pass # Replace with function body.
 
@@ -31,6 +30,7 @@ func deal_dmg():
 		#can_take_damage = false
 		print(health)
 		if (health <= 0):
+			Global.player_score += 500
 			self.queue_free()
 			
 
