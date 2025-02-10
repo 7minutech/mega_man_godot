@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dcodgnwufnm8c"]
+[gd_scene load_steps=22 format=4 uid="uid://dcodgnwufnm8c"]
 
 [ext_resource type="PackedScene" uid="uid://diy3kkanhnnf5" path="res://world/world.tscn" id="1_ineit"]
 [ext_resource type="Texture2D" uid="uid://b2dl3rqdbshhy" path="res://assests/Pixel Adventure 1/Free/Background/Green.png" id="2_p4as2"]
@@ -2160,13 +2160,7 @@ texture = ExtResource("6_2wccw")
 [sub_resource type="TileSet" id="TileSet_kkjao"]
 sources/0 = SubResource("TileSetAtlasSource_b3iq5")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_esg7t"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0n4y7"]
-size = Vector2(7, 283)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmml6"]
-size = Vector2(428, 20)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jdulu"]
 
 [node name="LayerHolder" type="Node2D"]
 
@@ -2184,13 +2178,7 @@ position = Vector2(12, 0)
 tile_set = SubResource("TileSet_kkjao")
 
 [node name="collisions" type="StaticBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_esg7t")
+physics_material_override = SubResource("PhysicsMaterial_jdulu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-6.5, -131.5)
-shape = SubResource("RectangleShape2D_0n4y7")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions"]
-position = Vector2(3525, -153)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_gmml6")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions"]
+polygon = PackedVector2Array(0, -25, -3, -277, 3437, -273, 3433, -58, 3498, -59, 3496, 5, 3432, 3, 3433, 145, 0, 144, -6, -19, -21, 166, 3463, 157, 3453, 27, 3546, 18, 3547, -81, 3459, -92, 3472, -306, -44, -312, -6, -19)

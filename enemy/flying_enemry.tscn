@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://d4fioao14ddl2"]
+
+[ext_resource type="Script" path="res://scripts/flying_enemry.gd" id="1_hw2a6"]
+[ext_resource type="Script" path="res://enemy/area_2d.gd" id="2_bihuo"]
+[ext_resource type="Texture2D" uid="uid://dr7bgbjljubr5" path="res://assests/Parallax_Country_side_city_night_city_destroyed/assetpack/first draft spaceship/First draft_spaceship.png" id="3_33f1g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_owih0"]
+radius = 21.095
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mav58"]
+atlas = ExtResource("3_33f1g")
+region = Rect2(0, 0, 350, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2i7h"]
+atlas = ExtResource("3_33f1g")
+region = Rect2(350, 0, 350, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okiey"]
+atlas = ExtResource("3_33f1g")
+region = Rect2(700, 0, 350, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ysic"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mav58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2i7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okiey")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[node name="FlyingEnemey" type="CharacterBody2D"]
+position = Vector2(498, 241)
+script = ExtResource("1_hw2a6")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_bihuo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_owih0")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0.499996, -2)
+scale = Vector2(1.45, 1.5)
+
+[node name="DMG_Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_4ysic")
+animation = &"fly"
+frame_progress = 0.143858
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="timeout" from="DMG_Cooldown" to="." method="_on_dmg_cooldown_timeout"]

@@ -24,6 +24,8 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(352, 260)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_esl5f")
@@ -34,7 +36,7 @@ shape = SubResource("CircleShape2D_esl5f")
 curve = SubResource("Curve2D_u6u50")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-287.679, -3.48846)
+position = Vector2(-287.68, -3.48846)
 rotation = -3.1399
 progress = 288.68
 rotates = false
