@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://cxogvslcrwmkj"]
+[gd_scene load_steps=11 format=4 uid="uid://cxogvslcrwmkj"]
 
 [ext_resource type="Texture2D" uid="uid://dnw1oaw8bsy06" path="res://assests/Hero's_Journey_Moon Graveyard/Final/Background_0.png" id="1_4k70k"]
 [ext_resource type="Texture2D" uid="uid://dxdiee5c4yetu" path="res://assests/Tiles/Tiles/Assets/Assets.png" id="1_lkr3p"]
+[ext_resource type="Script" path="res://boss_room.gd" id="1_wv61q"]
 [ext_resource type="PackedScene" uid="uid://drx682vnll82g" path="res://player/player.tscn" id="2_n3ra5"]
 [ext_resource type="PackedScene" uid="uid://dg730267bs21d" path="res://enemy/BossEnemy.tscn" id="4_5q56n"]
+[ext_resource type="AudioStream" uid="uid://qabdmadfxida" path="res://music/level-iii-medium-294426.mp3" id="6_mlyi1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_222hc"]
 texture = ExtResource("1_4k70k")
@@ -1609,6 +1611,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_fmete")
 
 [node name="BossRoom" type="Node2D"]
+script = ExtResource("1_wv61q")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 position = Vector2(-16, 189)
@@ -1632,3 +1635,6 @@ position = Vector2(28, -17)
 
 [node name="BossEnemy" parent="." instance=ExtResource("4_5q56n")]
 position = Vector2(408, -80)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_mlyi1")

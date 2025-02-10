@@ -4,7 +4,7 @@ extends CharacterBody2D
 var speed = 100
 var player_chase  = false
 var player = null
-var health = 1000
+var health = 200
 var player_in_atk_range = false
 var attack_ip = false
 var can_take_damage = true

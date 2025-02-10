@@ -4,7 +4,7 @@ extends CharacterBody2D
 var speed = 100
 var player_chase  = false
 var player = null
-var health = 1000
+var health = 20
 var player_in_atk_range = false
 var attack_ip = false
 var can_take_damage = true
@@ -73,7 +73,7 @@ func deal_range_dmg():
 		health -= 20
 		$DMG_Cooldown.start()
 		can_take_damage = false
-		#print(health)
+		print(health)
 		if (health <= 0):
 			self.queue_free()
 

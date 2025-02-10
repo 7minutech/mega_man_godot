@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnvrm2vwqnfyb"]
+[gd_scene load_steps=8 format=3 uid="uid://dnvrm2vwqnfyb"]
 
 [ext_resource type="PackedScene" uid="uid://dcodgnwufnm8c" path="res://world/layer_holder.tscn" id="1_1utne"]
 [ext_resource type="Script" path="res://main.gd" id="1_t66vk"]
 [ext_resource type="PackedScene" uid="uid://drx682vnll82g" path="res://player/player.tscn" id="2_fokds"]
 [ext_resource type="PackedScene" uid="uid://bmncyy7ed1ivm" path="res://enemy/OrcEnemy.tscn" id="4_bdjxw"]
+[ext_resource type="AudioStream" uid="uid://tr7ao0q3otx0" path="res://music/game-8-bit-on-278083.mp3" id="6_aw4eh"]
 [ext_resource type="PackedScene" uid="uid://d4fioao14ddl2" path="res://enemy/flying_enemry.tscn" id="6_uuk13"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1s0x"]
@@ -122,6 +123,9 @@ position = Vector2(3464, -32)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 position = Vector2(13, 3)
 shape = SubResource("RectangleShape2D_r1s0x")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_aw4eh")
 
 [connection signal="body_entered" from="TransitionArea" to="." method="_on_transition_area_body_entered"]
 [connection signal="body_entered" from="TransitionArea" to="Player" method="_on_transition_area_body_entered"]
