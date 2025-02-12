@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bmncyy7ed1ivm"]
+[gd_scene load_steps=36 format=3 uid="uid://bmncyy7ed1ivm"]
 
 [ext_resource type="Script" path="res://scripts/orc_enemy.gd" id="1_m55ch"]
 [ext_resource type="Texture2D" uid="uid://b83nlf6asgw6p" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Attack01.png" id="2_g0lop"]
@@ -6,18 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bwnjltirvqc7r" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc with shadows/Orc-Idle.png" id="3_jxcaf"]
 [ext_resource type="Texture2D" uid="uid://bsjyctfglogeb" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Hurt.png" id="4_h7dor"]
 [ext_resource type="Texture2D" uid="uid://clwdmx583hlsl" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc with shadows/Orc-Walk.png" id="4_kfpd3"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q8im2"]
-atlas = ExtResource("2_g0lop")
-region = Rect2(0, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uvv7y"]
-atlas = ExtResource("2_g0lop")
-region = Rect2(100, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2f53c"]
-atlas = ExtResource("2_g0lop")
-region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23rko"]
 atlas = ExtResource("2_g0lop")
@@ -123,15 +111,6 @@ region = Rect2(700, 0, 100, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q8im2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uvv7y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2f53c")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_23rko")
 }, {
 "duration": 1.0,
@@ -140,7 +119,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r7klg")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -246,7 +225,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_st5i2")
-animation = &"hurt"
+animation = &"attack"
 
 [node name="DectectoinArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -266,9 +245,13 @@ shape = SubResource("CircleShape2D_wyqdy")
 [node name="DMG_Cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="ATKTimer" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="DectectoinArea" to="." method="_on_dectectoin_area_body_entered"]
 [connection signal="body_exited" from="DectectoinArea" to="." method="_on_dectectoin_area_body_exited"]
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
 [connection signal="timeout" from="DMG_Cooldown" to="." method="_on_dmg_cooldown_timeout"]
+[connection signal="timeout" from="ATKTimer" to="." method="_on_atk_timer_timeout"]

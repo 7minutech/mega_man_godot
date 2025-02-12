@@ -10,6 +10,7 @@ var attack_ip = false
 var can_take_damage = true
 var taken_dmg = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var attacking = false
 func _physics_process(delta: float):
 	deal_with_dmg()
 	if not is_on_floor():
@@ -19,6 +20,9 @@ func _physics_process(delta: float):
 		await get_tree().create_timer(0.1).timeout
 		$AnimatedSprite2D.modulate = Color.WHITE
 		taken_dmg = false
+	if attacking:
+		$AnimatedSprite2D.play("attack")
+		return
 	if(player_chase):
 		position.x += (player.position.x - position.x)/speed
 		$AnimatedSprite2D.play("walk")
@@ -87,4 +91,13 @@ func _on_enemy_hitbox_area_entered(area: Area2D) -> void:
 	if area.has_method("arrow"):
 		taken_dmg = true
 		deal_range_dmg()
+	pass # Replace with function body.
+
+func atk():
+	attacking = true
+	$ATKTimer.start()
+
+
+func _on_atk_timer_timeout() -> void:
+	attacking = false
 	pass # Replace with function body.

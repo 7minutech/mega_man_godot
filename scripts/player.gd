@@ -85,6 +85,8 @@ func play_anim(movement : String):
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_atk_range = true
+		if body.has_method("atk"):
+			body.atk()
 	#print(body)
 	pass # Replace with function body. 
 
@@ -96,13 +98,12 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 func enemy_atk():
 	if(enemy_in_atk_range && enemy_atk_cd == true):	
 		health -= 20
+		print(health)
+		enemy_atk_cd = false
+		$ATKCooldown.start(	)
 		$AnimatedSprite2D.modulate = Color.RED
 		await get_tree().create_timer(0.1).timeout
 		$AnimatedSprite2D.modulate = Color.WHITE
-		enemy_atk_cd = false
-		#print("Player took damage")
-		$ATKCooldown.start(	)
-		#print(health)
 	
 func  player():
 	pass
