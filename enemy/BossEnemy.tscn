@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dg730267bs21d"]
+[gd_scene load_steps=58 format=3 uid="uid://dg730267bs21d"]
 
 [ext_resource type="Script" path="res://enemy/boss_enemy.gd" id="1_vp2l6"]
 [ext_resource type="Texture2D" uid="uid://brd5mn1rrhkhh" path="res://assests/boss_demon_slime_FREE_v1.0/spritesheets/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="2_kmfxn"]
@@ -90,6 +90,14 @@ region = Rect2(1152, 0, 288, 160)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iopd"]
 atlas = ExtResource("2_kmfxn")
 region = Rect2(1440, 0, 288, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrboo"]
+atlas = ExtResource("2_kmfxn")
+region = Rect2(1152, 480, 288, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_342jv"]
+atlas = ExtResource("2_kmfxn")
+region = Rect2(0, 320, 288, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kamkj"]
 atlas = ExtResource("2_kmfxn")
@@ -279,6 +287,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hrboo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_342jv")
+}],
+"loop": true,
+"name": &"rest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kamkj")
 }, {
 "duration": 1.0,
@@ -386,7 +405,8 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_st5i2")
-animation = &"walk"
+animation = &"rest"
+frame_progress = 0.507054
 
 [node name="DectectoinArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -417,6 +437,9 @@ one_shot = true
 wait_time = 7.5
 one_shot = true
 
+[node name="RestTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="body_entered" from="DectectoinArea" to="." method="_on_dectectoin_area_body_entered"]
 [connection signal="body_exited" from="DectectoinArea" to="." method="_on_dectectoin_area_body_exited"]
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
@@ -425,3 +448,4 @@ one_shot = true
 [connection signal="timeout" from="DMG_Cooldown" to="." method="_on_dmg_cooldown_timeout"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="InvicibleCDTimer" to="." method="_on_invicible_cd_timer_timeout"]
+[connection signal="timeout" from="RestTimer" to="." method="_on_rest_timer_timeout"]

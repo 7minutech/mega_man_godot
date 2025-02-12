@@ -11,6 +11,7 @@ var can_take_damage = true
 var taken_dmg = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_invincible = false
+var is_resting = false
 
 func _ready() -> void:
 	$InvincibleTimer.start()
@@ -27,7 +28,7 @@ func _physics_process(delta: float):
 	if is_invincible:
 		$AnimatedSprite2D.modulate = Color.BLACK
 		
-	if(player_chase):
+	if(player_chase and not is_resting):
 		position.x += (player.position.x - position.x)/speed
 		$AnimatedSprite2D.play("walk")
 		if ((player.position.x - position.x)	 < 0):
@@ -35,7 +36,10 @@ func _physics_process(delta: float):
 		else:
 			$AnimatedSprite2D.flip_h = true
 	else:
-		$AnimatedSprite2D.play("idle")
+		if is_resting: 
+			$AnimatedSprite2D.play("rest")
+		else:
+			$AnimatedSprite2D.play("idle")
 
 func _on_dectectoin_area_body_entered(body: Node2D) -> void:
 	player = body
@@ -106,8 +110,16 @@ func _on_invincible_timer_timeout() -> void:
 
 
 func _on_invicible_cd_timer_timeout() -> void:
-	$InvincibleTimer.start()
 	$InvicibleCDTimer.stop()
 	$AnimatedSprite2D.modulate = Color.WHITE
 	is_invincible = false
+	is_resting = true
+	$RestTimer.start()
+	pass # Replace with function body.
+
+
+func _on_rest_timer_timeout() -> void:
+	$RestTimer.stop()
+	is_resting = false
+	$InvincibleTimer.start()
 	pass # Replace with function body.
