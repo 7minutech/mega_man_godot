@@ -1,15 +1,20 @@
 extends CharacterBody2D
 
 
-var speed = 100
+var speed = 50
 var player_chase  = false
 var player = null
-var health = 200
+var health = 300
 var player_in_atk_range = false
 var attack_ip = false
 var can_take_damage = true
 var taken_dmg = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var is_invincible = false
+
+func _ready() -> void:
+	$InvincibleTimer.start()
+
 func _physics_process(delta: float):
 	deal_with_dmg()
 	if not is_on_floor():
@@ -19,6 +24,9 @@ func _physics_process(delta: float):
 		await get_tree().create_timer(0.1).timeout
 		$AnimatedSprite2D.modulate = Color.WHITE
 		taken_dmg = false
+	if is_invincible:
+		$AnimatedSprite2D.modulate = Color.BLACK
+		
 	if(player_chase):
 		position.x += (player.position.x - position.x)/speed
 		$AnimatedSprite2D.play("walk")
@@ -57,7 +65,7 @@ func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 	pass # Replace with function body.
 
 func deal_with_dmg():
-	if(player_in_atk_range && Global.player_current_atk):
+	if(player_in_atk_range && Global.player_current_atk and not is_invincible):
 		if can_take_damage:
 			taken_dmg = true
 			health -= 20
@@ -69,7 +77,7 @@ func deal_with_dmg():
 				self.queue_free()
 
 func deal_range_dmg():
-	if can_take_damage:
+	if can_take_damage and not is_invincible:
 		health -= 20
 		$DMG_Cooldown.start()
 		can_take_damage = false
@@ -84,7 +92,22 @@ func _on_dmg_cooldown_timeout() -> void:
 
 
 func _on_enemy_hitbox_area_entered(area: Area2D) -> void:
-	if area.has_method("arrow"):
+	if area.has_method("arrow") and not is_invincible:
 		taken_dmg = true
 		deal_range_dmg()
+	pass # Replace with function body.
+
+
+func _on_invincible_timer_timeout() -> void:
+	is_invincible = true
+	$InvincibleTimer.stop()
+	$InvicibleCDTimer.start()
+	pass # Replace with function body.
+
+
+func _on_invicible_cd_timer_timeout() -> void:
+	$InvincibleTimer.start()
+	$InvicibleCDTimer.stop()
+	$AnimatedSprite2D.modulate = Color.WHITE
+	is_invincible = false
 	pass # Replace with function body.
