@@ -93,6 +93,9 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 		enemy_in_atk_range = true
 		if body.has_method("atk"):
 			body.atk()
+		if body.has_method("boss"):
+			if body.is_resting:
+				enemy_in_atk_range = false
 	#print(body)
 	pass # Replace with function body. 
 
@@ -208,3 +211,6 @@ func set_ui_health():
 func play_jump_sound():
 	$JumpSound.pitch_scale = (randf_range(1.5, 2))
 	$JumpSound.play()
+
+
+	

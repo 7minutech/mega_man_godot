@@ -430,11 +430,11 @@ shape = SubResource("CircleShape2D_wyqdy")
 wait_time = 0.5
 
 [node name="InvincibleTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 7.0
 one_shot = true
 
 [node name="InvicibleCDTimer" type="Timer" parent="."]
-wait_time = 7.5
+wait_time = 4.0
 one_shot = true
 
 [node name="RestTimer" type="Timer" parent="."]

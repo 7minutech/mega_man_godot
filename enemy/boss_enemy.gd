@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 50
+var speed = 40
 var player_chase  = false
 var player = null
 var health = 300
@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float):
 	deal_with_dmg()
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	if taken_dmg:
@@ -123,3 +124,10 @@ func _on_rest_timer_timeout() -> void:
 	is_resting = false
 	$InvincibleTimer.start()
 	pass # Replace with function body.
+
+func boss():
+	pass
+	
+func stunned():
+	if is_resting:
+		player_in_atk_range = false
