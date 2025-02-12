@@ -4,7 +4,7 @@ extends CharacterBody2D
 var speed = 100
 var player_chase  = false
 var player = null
-var health = 20
+var health = 100
 var player_in_atk_range = false
 var attack_ip = false
 var can_take_damage = true
@@ -64,7 +64,7 @@ func deal_with_dmg():
 	if(player_in_atk_range && Global.player_current_atk):
 		if can_take_damage:
 			taken_dmg = true
-			health -= 20
+			health -= 25
 			$DMG_Cooldown.start()
 			can_take_damage = false
 			#print(health)
@@ -74,7 +74,7 @@ func deal_with_dmg():
 
 func deal_range_dmg():
 	if can_take_damage:
-		health -= 20
+		health -= 25
 		$DMG_Cooldown.start()
 		can_take_damage = false
 		print(health)

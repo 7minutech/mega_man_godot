@@ -1,10 +1,14 @@
-[gd_scene load_steps=37 format=3 uid="uid://drx682vnll82g"]
+[gd_scene load_steps=41 format=3 uid="uid://drx682vnll82g"]
 
 [ext_resource type="Texture2D" uid="uid://jhv565q5ppcl" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Idle.png" id="1_6gf61"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7710n"]
 [ext_resource type="Texture2D" uid="uid://drg7cxjr30f7c" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier with shadows/Soldier-Attack03.png" id="2_btx2v"]
 [ext_resource type="Texture2D" uid="uid://c8bltfvdv6brf" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Walk.png" id="2_jt0er"]
 [ext_resource type="Texture2D" uid="uid://v03d7m52asua" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Attack01.png" id="3_m82pd"]
+[ext_resource type="Texture2D" uid="uid://do32vfdhk35yt" path="res://assests/Item 3-1.png.png" id="6_ehsao"]
+[ext_resource type="AudioStream" uid="uid://bcsk6antb5y8d" path="res://music/sounds/sword-sound-2-36274.mp3" id="7_75hre"]
+[ext_resource type="AudioStream" uid="uid://clupi8misj2w" path="res://music/sounds/bow-release-bow-and-arrow-4-101936.mp3" id="8_w5pq2"]
+[ext_resource type="AudioStream" uid="uid://ih2j1xcoi0e5" path="res://music/sounds/cartoon-jump-6462.mp3" id="9_wv5t6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ve37j"]
 atlas = ExtResource("2_btx2v")
@@ -196,7 +200,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dw7kv")
 }],
-"loop": true,
+"loop": false,
 "name": &"sword_attack",
 "speed": 5.0
 }, {
@@ -244,7 +248,7 @@ script = ExtResource("1_7710n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jdhmk")
-animation = &"jump"
+animation = &"sword_attack"
 speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -274,13 +278,6 @@ rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="ScoreLabel" type="Label" parent="WorldCamera"]
-offset_left = -119.0
-offset_top = -93.0
-offset_right = -99.0
-offset_bottom = -70.0
-size_flags_horizontal = 4
-
 [node name="ArrowSpawn" type="Marker2D" parent="."]
 
 [node name="ArrowSpawnTimer" type="Timer" parent="."]
@@ -291,6 +288,81 @@ limit_left = 0
 limit_top = -171
 limit_right = 570
 limit_bottom = 76
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Heart" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 20)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Heart"]
+position = Vector2(13, 15)
+texture = ExtResource("6_ehsao")
+
+[node name="Heart2" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 20)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Heart2"]
+position = Vector2(37, 15)
+texture = ExtResource("6_ehsao")
+
+[node name="Heart3" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 20)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Heart3"]
+position = Vector2(61, 15)
+texture = ExtResource("6_ehsao")
+
+[node name="Heart4" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 20)
+offset_left = 25.0
+offset_right = 65.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Heart4"]
+position = Vector2(60, 15)
+texture = ExtResource("6_ehsao")
+
+[node name="Heart5" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 20)
+offset_left = 46.0
+offset_top = 34.0
+offset_right = 86.0
+offset_bottom = 74.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Heart5"]
+position = Vector2(63, -19)
+texture = ExtResource("6_ehsao")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2"]
+offset_left = 8.0
+offset_top = 23.0
+offset_right = 48.0
+offset_bottom = 46.0
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SwordSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_75hre")
+volume_db = 5.0
+
+[node name="BowSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_w5pq2")
+volume_db = 22.0
+pitch_scale = 1.78
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_wv5t6")
+volume_db = -6.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="player_hitbox" to="." method="_on_player_hitbox_area_entered"]

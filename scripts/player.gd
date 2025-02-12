@@ -5,7 +5,7 @@ const speed = 100
 var current_direction = "none"
 var enemy_in_atk_range = false
 var enemy_atk_cd = true
-var health = 200
+var health = 5
 var alive = true
 var atk_ip = false
 var jump_velcoity = -400
@@ -13,7 +13,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var arrow = preload("res://arrow.tscn")
 
 func _physics_process(delta: float):
-	$WorldCamera/ScoreLabel.text = "Score: " + str(Global.player_score)
+	$CanvasLayer2/HBoxContainer/ScoreLabel.text = "Score: " + str(Global.player_score)
+	set_ui_health()
 	player_movement(delta)
 	enemy_atk()
 	current_camera()
@@ -28,6 +29,7 @@ func _physics_process(delta: float):
 		self.queue_free()
 
 func _ready():
+	randomize()
 	$AnimatedSprite2D.play("idle")
 	
 func player_movement(delta):
@@ -39,14 +41,18 @@ func player_movement(delta):
 		play_anim("walk")
 		velocity.x = speed
 		if Input.is_action_just_pressed("jump") and is_on_floor():
+			play_jump_sound()
+			print("jump")
 			jump()
 	elif  Input.is_action_pressed("left"):
 		current_direction = "left"
 		play_anim("walk")
 		velocity.x = -speed
 		if Input.is_action_just_pressed("jump") and is_on_floor():
+			play_jump_sound()
 			jump()
 	elif Input.is_action_just_pressed("jump") and is_on_floor():
+		play_jump_sound()
 		jump()
 	else:
 		play_anim("idle")
@@ -97,7 +103,7 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 		pass # Replace with function body.
 func enemy_atk():
 	if(enemy_in_atk_range && enemy_atk_cd == true):	
-		health -= 20
+		health -= 1
 		print(health)
 		enemy_atk_cd = false
 		$ATKCooldown.start(	)
@@ -124,8 +130,12 @@ func attack():
 		if dir == "left":
 			$AnimatedSprite2D.flip_h = true
 		if Input.is_action_just_pressed("sword_attack"):
+			$SwordSound.pitch_scale = (randf_range(0.7, 1.2))
+			$SwordSound.play()
 			$AnimatedSprite2D.play("sword_attack")
 		if Input.is_action_just_pressed("bow_attack"):
+			$BowSound.pitch_scale = (randf_range(1.5, 2))
+			$BowSound.play()
 			$AnimatedSprite2D.play("bow_attack", 4.0)
 			spawn_arrow()
 		$DealATKTimer.start()
@@ -180,4 +190,21 @@ func current_camera():
 		$WorldCamera/ScoreLabel.hide()
 		$BossCamera.enabled = true 
 		$WorldCamera.enabled = false
+		
+func set_ui_health():
+	if health == 4:
+		$CanvasLayer/Heart5.hide()
+	if health == 3:
+		$CanvasLayer/Heart4.hide()
+	if health == 2:
+		$CanvasLayer/Heart3.hide()
+	if health == 2:
+		$CanvasLayer/Heart3.hide()
+	if health == 1:
+		$CanvasLayer/Heart2.hide()
+	if health == 0:
+		$CanvasLayer/Heart1.hide()
 	
+func play_jump_sound():
+	$JumpSound.pitch_scale = (randf_range(1.5, 2))
+	$JumpSound.play()
