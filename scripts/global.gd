@@ -10,9 +10,12 @@ var player_exit_clifside_posy = 0
 var player_start_posx = 0
 var player_start_posy = 0
 var player_score =  0
+var player_health = 5
 
 func finish_scene_change():
 	if transition_scene:
 		transition_scene = false 
 		if current_scene == "world":
 			current_scene = "boss_room"
+		else:
+			current_scene = "world"

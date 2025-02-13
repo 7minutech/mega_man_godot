@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 
-const speed = 100
+const speed = 200
 var current_direction = "none"
 var enemy_in_atk_range = false
 var enemy_atk_cd = true
-var health = 5
+var health = Global.player_health
 var alive = true
 var atk_ip = false
 var jump_velcoity = -400
@@ -15,7 +15,8 @@ var arrow = preload("res://arrow.tscn")
 func _physics_process(delta: float):
 	$CanvasLayer2/HBoxContainer/ScoreLabel.text = "Score: " + str(Global.player_score)
 	set_ui_health()
-	player_movement(delta)
+	if alive:
+		player_movement(delta)
 	enemy_atk()
 	current_camera()
 	if velocity.x == 0:
@@ -23,10 +24,8 @@ func _physics_process(delta: float):
 	
 	if health <= 0:
 		health = 0
-		# end scren here 
 		alive = false
-		#print("dead")
-		self.queue_free()
+		$AnimatedSprite2D.hide()
 
 func _ready():
 	randomize()
@@ -84,10 +83,6 @@ func play_anim(movement : String):
 			if atk_ip == false:
 				anim.play("idle")
 
-				
-	
-
-
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_atk_range = true
@@ -99,7 +94,6 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	#print(body)
 	pass # Replace with function body. 
 
-
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
 		if body.has_method("enemy"):
 			enemy_in_atk_range = false
@@ -107,7 +101,7 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 func enemy_atk():
 	if(enemy_in_atk_range && enemy_atk_cd == true):	
 		health -= 1
-		print(health)
+		Global.player_health = health
 		enemy_atk_cd = false
 		$ATKCooldown.start(	)
 		$AnimatedSprite2D.modulate = Color.RED
@@ -195,22 +189,19 @@ func current_camera():
 		$WorldCamera.enabled = false
 		
 func set_ui_health():
-	if health == 4:
+	if health < 5:
 		$CanvasLayer/Heart5.hide()
-	if health == 3:
+	if health < 4:
 		$CanvasLayer/Heart4.hide()
-	if health == 2:
+	if health < 3:
 		$CanvasLayer/Heart3.hide()
-	if health == 2:
-		$CanvasLayer/Heart3.hide()
-	if health == 1:
+	if health < 2:
 		$CanvasLayer/Heart2.hide()
-	if health == 0:
-		$CanvasLayer/Heart1.hide()
+	if health < 1:
+		$CanvasLayer/Heart.hide()
 	
 func play_jump_sound():
 	$JumpSound.pitch_scale = (randf_range(1.5, 2))
 	$JumpSound.play()
-
 
 	

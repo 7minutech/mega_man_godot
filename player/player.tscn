@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://do32vfdhk35yt" path="res://assests/Item 3-1.png.png" id="6_ehsao"]
 [ext_resource type="AudioStream" uid="uid://bcsk6antb5y8d" path="res://music/sounds/sword-sound-2-36274.mp3" id="7_75hre"]
 [ext_resource type="AudioStream" uid="uid://clupi8misj2w" path="res://music/sounds/bow-release-bow-and-arrow-4-101936.mp3" id="8_w5pq2"]
-[ext_resource type="AudioStream" uid="uid://ih2j1xcoi0e5" path="res://music/sounds/cartoon-jump-6462.mp3" id="9_wv5t6"]
+[ext_resource type="AudioStream" uid="uid://ih2j1xcoi0e5" path="res://world/cartoon-jump-6462.mp3" id="9_wv5t6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ve37j"]
 atlas = ExtResource("2_btx2v")

@@ -10,6 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if game_over():
+		change_scene()
 	pass
 	
 func start_pattern(pattern_num, time):
@@ -58,3 +60,12 @@ func _on_tile_2_timer_timeout() -> void:
 	$Tile2Timer.start()
 	
 	pass # Replace with function body.
+
+func game_over():
+	if $Player.health <= 0:
+		return true
+	false
+
+func change_scene():
+		get_tree().change_scene_to_file("res://main.tscn")
+		Global.finish_scene_change()
