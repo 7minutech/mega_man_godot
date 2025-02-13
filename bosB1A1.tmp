@@ -2013,12 +2013,6 @@ one_shot = true
 wait_time = 0.75
 one_shot = true
 
-[node name="EndMessageLabel" type="Label" parent="."]
-offset_left = 192.0
-offset_top = -198.0
-offset_right = 232.0
-offset_bottom = -175.0
-
 [connection signal="timeout" from="Tile0Timer" to="." method="_on_tile_0_timer_timeout"]
 [connection signal="timeout" from="Tile1Timer" to="." method="_on_tile_1_timer_timeout"]
 [connection signal="timeout" from="Tile2Timer" to="." method="_on_tile_2_timer_timeout"]

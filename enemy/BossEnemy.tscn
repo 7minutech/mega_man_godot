@@ -1,7 +1,8 @@
-[gd_scene load_steps=58 format=3 uid="uid://dg730267bs21d"]
+[gd_scene load_steps=46 format=3 uid="uid://dg730267bs21d"]
 
 [ext_resource type="Script" path="res://enemy/boss_enemy.gd" id="1_vp2l6"]
 [ext_resource type="Texture2D" uid="uid://brd5mn1rrhkhh" path="res://assests/boss_demon_slime_FREE_v1.0/spritesheets/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="2_kmfxn"]
+[ext_resource type="AudioStream" uid="uid://bcsk6antb5y8d" path="res://music/sounds/sword-sound-2-36274.mp3" id="3_qxkm3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gnwo7"]
 atlas = ExtResource("2_kmfxn")
@@ -99,65 +100,13 @@ region = Rect2(1152, 480, 288, 160)
 atlas = ExtResource("2_kmfxn")
 region = Rect2(0, 320, 288, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kamkj"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(0, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6mpfn"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(288, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hn32k"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(576, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0hnsu"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(864, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_np7e4"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(1152, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_heyx6"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(1440, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lr74o"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(1728, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ecfb"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(2016, 320, 288, 160)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1r4r7"]
 atlas = ExtResource("2_kmfxn")
 region = Rect2(2304, 320, 288, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7lpfb"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(2592, 320, 288, 160)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xax4h"]
 atlas = ExtResource("2_kmfxn")
 region = Rect2(2880, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0auyj"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(3168, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_inkc0"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(3456, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4dgh"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(3744, 320, 288, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7uus"]
-atlas = ExtResource("2_kmfxn")
-region = Rect2(4032, 320, 288, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84nuk"]
 atlas = ExtResource("2_kmfxn")
@@ -298,49 +247,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kamkj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6mpfn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hn32k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0hnsu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_np7e4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_heyx6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lr74o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5ecfb")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_1r4r7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7lpfb")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_xax4h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0auyj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_inkc0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w4dgh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g7uus")
 }],
 "loop": true,
 "name": &"sword_attack",
@@ -389,7 +299,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_docql"]
-radius = 146.003
+radius = 550.015
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nm5gw"]
 radius = 19.0263
@@ -400,13 +310,13 @@ radius = 20.025
 [node name="BossEnemy" type="CharacterBody2D"]
 position = Vector2(357, 175)
 script = ExtResource("1_vp2l6")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_st5i2")
-animation = &"rest"
-frame_progress = 0.507054
+animation = &"sword_attack"
+frame = 1
+frame_progress = 0.909265
 
 [node name="DectectoinArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -440,6 +350,13 @@ one_shot = true
 [node name="RestTimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="AtkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qxkm3")
+pitch_scale = 0.96
+
+[node name="FreezeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
 [connection signal="body_entered" from="DectectoinArea" to="." method="_on_dectectoin_area_body_entered"]
 [connection signal="body_exited" from="DectectoinArea" to="." method="_on_dectectoin_area_body_exited"]
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
@@ -449,3 +366,4 @@ wait_time = 3.0
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="InvicibleCDTimer" to="." method="_on_invicible_cd_timer_timeout"]
 [connection signal="timeout" from="RestTimer" to="." method="_on_rest_timer_timeout"]
+[connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timer_timeout"]

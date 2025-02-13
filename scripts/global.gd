@@ -11,6 +11,7 @@ var player_start_posx = 0
 var player_start_posy = 0
 var player_score =  0
 var player_health = 5
+var boss_died = false
 
 func finish_scene_change():
 	if transition_scene:

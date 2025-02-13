@@ -36,6 +36,7 @@ func change_scene():
 
 func game_over():
 	if $Player.health <= 0: return true
+	if Global.boss_died: return true
 	false
 
 func restart_game():
@@ -43,8 +44,14 @@ func restart_game():
 		$Player.position = $ResetMarker.position
 		show_restart_ui()
 		if restart:
+			hide_restart_ui()
 			Global.player_health = 5
+			print("jf")
 			restart = false
+			get_tree().change_scene_to_file("res://main.tscn")
+			Global.finish_scene_change()
+			if not is_inside_tree():
+				return
 			get_tree().reload_current_scene()
 			Global.player_score = 0
 
@@ -55,6 +62,8 @@ func hide_restart_ui():
 	$NoButton.hide()
 
 func show_restart_ui():
+	if $Player.health<= 0:
+		$RestartLabel.text = "Try again?"
 	$RestartLabel.show()
 	$YesButton.show()
 	$NoButton.show()
@@ -62,4 +71,9 @@ func show_restart_ui():
 
 func _on_yes_button_pressed() -> void:
 	restart = true
+	pass # Replace with function body.
+
+
+func _on_no_button_pressed() -> void:
+	get_tree().quit()
 	pass # Replace with function body.

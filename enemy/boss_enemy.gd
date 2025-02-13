@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 
-var speed = 40
+var speed = 45
 var player_chase  = false
 var player = null
-var health = 300
+var health = 20
 var player_in_atk_range = false
 var attack_ip = false
 var can_take_damage = true
@@ -12,35 +12,47 @@ var taken_dmg = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_invincible = false
 var is_resting = false
-
+var attacking = false
+var frozen = true
+var alive = true
 func _ready() -> void:
+	$AnimatedSprite2D.play("idle")
+	$FreezeTimer.start()
 	$InvincibleTimer.start()
 
 func _physics_process(delta: float):
-	deal_with_dmg()
-	
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	if taken_dmg:
-		$AnimatedSprite2D.modulate = Color.RED
-		await get_tree().create_timer(0.1).timeout
-		$AnimatedSprite2D.modulate = Color.WHITE
-		taken_dmg = false
-	if is_invincible:
-		$AnimatedSprite2D.modulate = Color.BLACK
-		
-	if(player_chase and not is_resting):
-		position.x += (player.position.x - position.x)/speed
-		$AnimatedSprite2D.play("walk")
-		if ((player.position.x - position.x)	 < 0):
-			$AnimatedSprite2D.flip_h = false
-		else:
-			$AnimatedSprite2D.flip_h = true
-	else:
-		if is_resting: 
-			$AnimatedSprite2D.play("rest")
-		else:
-			$AnimatedSprite2D.play("idle")
+	if not alive: 
+		$AnimatedSprite2D.play("death")
+		await get_tree().create_timer(3.1).timeout
+		self.queue_free()
+	if not frozen and alive:
+		deal_with_dmg()
+		if not is_on_floor():
+			velocity.y += gravity * delta
+		if taken_dmg:
+			$AnimatedSprite2D.modulate = Color.RED
+			await get_tree().create_timer(0.1).timeout
+			$AnimatedSprite2D.modulate = Color.WHITE
+			taken_dmg = false
+		if is_invincible:
+			$AnimatedSprite2D.modulate = Color.BLACK
+		if attacking and not is_resting:
+			$AnimatedSprite2D.play("sword_attack")
+			await get_tree().create_timer(0.5).timeout
+			attacking = false
+		if not attacking:
+			if(player_chase and not is_resting):
+				position.x += (player.position.x - position.x)/speed
+				$AnimatedSprite2D.play("walk")
+				if ((player.position.x - position.x)	 < 0):
+					$AnimatedSprite2D.flip_h = false
+				else:
+					$AnimatedSprite2D.flip_h = true
+			else:
+				if is_resting: 
+					$AnimatedSprite2D.play("rest")
+				else:
+					$AnimatedSprite2D.play("idle")
 
 func _on_dectectoin_area_body_entered(body: Node2D) -> void:
 	player = body
@@ -60,6 +72,9 @@ func enemy():
 func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
 	if(body.has_method("player")):
 		player_in_atk_range = true
+		attacking = true
+		$AtkSound.pitch_scale = (randf_range(0.3, 0.6))
+		$AtkSound.play()
 	#print(body)
 	pass # Replace with function body.
 
@@ -78,8 +93,9 @@ func deal_with_dmg():
 			can_take_damage = false
 			#print(health)
 			if (health <= 0):
-				Global.player_score += 1000
-				self.queue_free()
+				Global.player_score += 5000
+				alive = false
+				
 
 func deal_range_dmg():
 	if can_take_damage and not is_invincible:
@@ -88,7 +104,7 @@ func deal_range_dmg():
 		can_take_damage = false
 		#print(health)
 		if (health <= 0):
-			self.queue_free()
+			alive = false
 
 
 func _on_dmg_cooldown_timeout() -> void:
@@ -131,3 +147,8 @@ func boss():
 func stunned():
 	if is_resting:
 		player_in_atk_range = false
+
+
+func _on_freeze_timer_timeout() -> void:
+	frozen = false
+	pass # Replace with function body.

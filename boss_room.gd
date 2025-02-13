@@ -1,8 +1,9 @@
 extends Node2D
-
+var game_ended = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$EndMessageLabel.hide()
 	$AudioStreamPlayer2D.play()
 	start_pattern(1, 3)
 	pass # Replace with function body.
@@ -12,6 +13,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if game_over():
 		change_scene()
+	if $BossEnemy == null and not game_ended:
+		end_game_message()
+		game_ended = true
 	pass
 	
 func start_pattern(pattern_num, time):
@@ -65,6 +69,19 @@ func game_over():
 	if $Player.health <= 0:
 		return true
 	false
+
+func end_game_message():
+	$EndMessageLabel.show()
+	$EndMessageLabel.text = "You win! Game over!"
+	await get_tree().create_timer(3.5).timeout
+	$EndMessageLabel.text = "Nothing else is here for you"
+	await get_tree().create_timer(5).timeout
+	$EndMessageLabel.text = "Are you still here?"
+	await get_tree().create_timer(3.5).timeout
+	$EndMessageLabel.text = "Fine then you leave me no choice"
+	await get_tree().create_timer(3.5).timeout
+	get_tree().quit()
+	
 
 func change_scene():
 		get_tree().change_scene_to_file("res://main.tscn")

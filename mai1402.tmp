@@ -16,7 +16,7 @@ script = ExtResource("1_t66vk")
 [node name="LayerHolder" parent="." instance=ExtResource("1_1utne")]
 
 [node name="Player" parent="." instance=ExtResource("2_fokds")]
-position = Vector2(52, -14)
+position = Vector2(54, -14)
 
 [node name="OrcEnemy" parent="." instance=ExtResource("4_bdjxw")]
 position = Vector2(678, -17)
