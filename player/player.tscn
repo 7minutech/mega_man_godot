@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://drx682vnll82g"]
+[gd_scene load_steps=42 format=3 uid="uid://drx682vnll82g"]
 
 [ext_resource type="Texture2D" uid="uid://jhv565q5ppcl" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Idle.png" id="1_6gf61"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7710n"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://do32vfdhk35yt" path="res://assests/Item 3-1.png.png" id="6_ehsao"]
 [ext_resource type="AudioStream" uid="uid://bcsk6antb5y8d" path="res://music/sounds/sword-sound-2-36274.mp3" id="7_75hre"]
 [ext_resource type="AudioStream" uid="uid://clupi8misj2w" path="res://music/sounds/bow-release-bow-and-arrow-4-101936.mp3" id="8_w5pq2"]
+[ext_resource type="AudioStream" uid="uid://cmvj5nxlvl7le" path="res://music/metal-crunch-263638.mp3" id="9_63dhn"]
 [ext_resource type="AudioStream" uid="uid://ih2j1xcoi0e5" path="res://world/cartoon-jump-6462.mp3" id="9_wv5t6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ve37j"]
@@ -360,9 +361,16 @@ stream = ExtResource("8_w5pq2")
 volume_db = 22.0
 pitch_scale = 1.78
 
+[node name="HittingMetalSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_63dhn")
+volume_db = 12.0
+
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_wv5t6")
 volume_db = -6.0
+
+[node name="BowCDTimer" type="Timer" parent="."]
+wait_time = 0.25
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="player_hitbox" to="." method="_on_player_hitbox_area_entered"]
@@ -372,3 +380,4 @@ volume_db = -6.0
 [connection signal="timeout" from="ATKCooldown" to="." method="_on_atk_cooldown_timeout"]
 [connection signal="timeout" from="DealATKTimer" to="." method="_on_deal_atk_timer_timeout"]
 [connection signal="timeout" from="ArrowSpawnTimer" to="." method="_on_arrow_spawn_timer_timeout"]
+[connection signal="timeout" from="BowCDTimer" to="." method="_on_bow_cd_timer_timeout"]

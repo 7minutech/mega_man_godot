@@ -36,8 +36,8 @@ func deal_dmg():
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.has_method("player")):
-		print("player in atk range ")
 		player_in_atk_range = true
+		print("hoit")
 	if area.has_method("arrow"):
 		taken_dmg = true
 		deal_dmg()
@@ -80,3 +80,6 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if(body.has_method("player")):
 		player_in_atk_range = false
 	pass # Replace with function body.
+
+func flying():
+	pass

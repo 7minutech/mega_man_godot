@@ -11,6 +11,7 @@ var atk_ip = false
 var jump_velcoity = -400
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var arrow = preload("res://arrow.tscn")
+var bow_cd = false
 
 func _physics_process(delta: float):
 	$CanvasLayer2/HBoxContainer/ScoreLabel.text = "Score: " + str(Global.player_score)
@@ -119,7 +120,7 @@ func _on_atk_cooldown_timeout() -> void:
 
 func attack():
 	var dir = current_direction
-	if Input.is_action_just_pressed("sword_attack") or Input.is_action_just_pressed("bow_attack"):
+	if Input.is_action_just_pressed("sword_attack") or (Input.is_action_just_pressed("bow_attack") and not bow_cd):
 		Global.player_current_atk = true
 		atk_ip = true
 		if dir == "right":
@@ -131,6 +132,8 @@ func attack():
 			$SwordSound.play()
 			$AnimatedSprite2D.play("sword_attack")
 		if Input.is_action_just_pressed("bow_attack"):
+			$BowCDTimer.start()
+			bow_cd = true
 			$BowSound.pitch_scale = (randf_range(1.5, 2))
 			$BowSound.play()
 			$AnimatedSprite2D.play("bow_attack", 4.0)
@@ -169,6 +172,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.has_method("enemy"):
+		$HittingMetalSound.pitch_scale = (randf_range(1.5, 2))
+		$HittingMetalSound.play()
 		enemy_in_atk_range = true
 		
 	pass # Replace with function body.
@@ -203,5 +208,8 @@ func set_ui_health():
 func play_jump_sound():
 	$JumpSound.pitch_scale = (randf_range(1.5, 2))
 	$JumpSound.play()
-
 	
+func _on_bow_cd_timer_timeout() -> void:
+	bow_cd = false
+	$BowCDTimer.stop()
+	pass # Replace with function body.

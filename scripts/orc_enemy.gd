@@ -22,6 +22,8 @@ func _physics_process(delta: float):
 		taken_dmg = false
 	if attacking:
 		$AnimatedSprite2D.play("attack")
+		$AxeSound.pitch_scale = (randf_range(0.7, 1.2))
+		$AxeSound.play(0.31)
 		return
 	if(player_chase):
 		position.x += (player.position.x - position.x)/speed
