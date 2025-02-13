@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const speed = 200
+const speed = 100
 var current_direction = "none"
 var enemy_in_atk_range = false
 var enemy_atk_cd = true
@@ -42,7 +42,6 @@ func player_movement(delta):
 		velocity.x = speed
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			play_jump_sound()
-			print("jump")
 			jump()
 	elif  Input.is_action_pressed("left"):
 		current_direction = "left"
@@ -92,7 +91,6 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 		if body.has_method("boss"):
 			if body.is_resting:
 				enemy_in_atk_range = false
-	#print(body)
 	pass # Replace with function body. 
 
 func _on_player_hitbox_body_exited(body: Node2D) -> void:

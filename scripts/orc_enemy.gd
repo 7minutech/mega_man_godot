@@ -53,7 +53,6 @@ func enemy():
 func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
 	if(body.has_method("player")):
 		player_in_atk_range = true
-	#print(body)
 	pass # Replace with function body.
 
 
@@ -79,7 +78,6 @@ func deal_range_dmg():
 		health -= 25
 		$DMG_Cooldown.start()
 		can_take_damage = false
-		print(health)
 		if (health <= 0):
 			self.queue_free()
 
