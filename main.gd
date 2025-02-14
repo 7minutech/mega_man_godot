@@ -46,14 +46,14 @@ func restart_game():
 		if restart:
 			hide_restart_ui()
 			Global.player_health = 5
-			print("jf")
+			Global.player_score = 0
 			restart = false
 			get_tree().change_scene_to_file("res://main.tscn")
 			Global.finish_scene_change()
 			if not is_inside_tree():
 				return
 			get_tree().reload_current_scene()
-			Global.player_score = 0
+			
 
 
 func hide_restart_ui():

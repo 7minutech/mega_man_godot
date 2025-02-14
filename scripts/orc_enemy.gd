@@ -79,6 +79,7 @@ func deal_range_dmg():
 		$DMG_Cooldown.start()
 		can_take_damage = false
 		if (health <= 0):
+			Global.player_score += 1000
 			self.queue_free()
 
 

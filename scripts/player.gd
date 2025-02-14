@@ -12,7 +12,7 @@ var jump_velcoity = -400
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var arrow = preload("res://arrow.tscn")
 var bow_cd = false
-
+var player_score
 func _physics_process(delta: float):
 	$CanvasLayer2/HBoxContainer/ScoreLabel.text = "Score: " + str(Global.player_score)
 	set_ui_health()

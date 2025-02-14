@@ -16,7 +16,7 @@ script = ExtResource("1_t66vk")
 [node name="LayerHolder" parent="." instance=ExtResource("1_1utne")]
 
 [node name="Player" parent="." instance=ExtResource("2_fokds")]
-position = Vector2(52, -14)
+position = Vector2(87, -21)
 
 [node name="OrcEnemy" parent="." instance=ExtResource("4_bdjxw")]
 position = Vector2(678, -17)
@@ -150,7 +150,7 @@ offset_bottom = -128.0
 text = "No"
 
 [node name="ResetMarker" type="Marker2D" parent="."]
-position = Vector2(54, -14)
+position = Vector2(85, -20)
 
 [connection signal="body_entered" from="TransitionArea" to="." method="_on_transition_area_body_entered"]
 [connection signal="body_entered" from="TransitionArea" to="Player" method="_on_transition_area_body_entered"]
