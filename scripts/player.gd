@@ -36,6 +36,10 @@ func player_movement(delta):
 	#velocity.y = get_my_gravity() * delta
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	if Input.is_action_pressed("Controls"):
+		show_controls()
+	else:
+		hide_controls()
 	if Input.is_action_pressed("right"):
 		current_direction = "right"
 		play_anim("walk")
@@ -211,3 +215,11 @@ func _on_bow_cd_timer_timeout() -> void:
 	bow_cd = false
 	$BowCDTimer.stop()
 	pass # Replace with function body.
+
+func show_controls():
+	$CanvasLayer3/Mouse.show()
+	$CanvasLayer3/Keyboard.show()
+	
+func hide_controls():
+	$CanvasLayer3/Mouse.hide()
+	$CanvasLayer3/Keyboard.hide()

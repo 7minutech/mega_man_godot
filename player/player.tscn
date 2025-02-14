@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://drx682vnll82g"]
+[gd_scene load_steps=44 format=3 uid="uid://drx682vnll82g"]
 
 [ext_resource type="Texture2D" uid="uid://jhv565q5ppcl" path="res://assests/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Soldier/Soldier-Idle.png" id="1_6gf61"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7710n"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://clupi8misj2w" path="res://music/sounds/bow-release-bow-and-arrow-4-101936.mp3" id="8_w5pq2"]
 [ext_resource type="AudioStream" uid="uid://cmvj5nxlvl7le" path="res://music/metal-crunch-263638.mp3" id="9_63dhn"]
 [ext_resource type="AudioStream" uid="uid://ih2j1xcoi0e5" path="res://world/cartoon-jump-6462.mp3" id="9_wv5t6"]
+[ext_resource type="Texture2D" uid="uid://blps674gtw5g" path="res://assests/Controls/mouse_with_text.png" id="11_qqu50"]
+[ext_resource type="Texture2D" uid="uid://dsnf2np1nw1th" path="res://assests/Controls/keyboard_controls_with_text.png" id="12_t3b3l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ve37j"]
 atlas = ExtResource("2_btx2v")
@@ -371,6 +373,30 @@ volume_db = -6.0
 
 [node name="BowCDTimer" type="Timer" parent="."]
 wait_time = 0.25
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="Mouse" type="HBoxContainer" parent="CanvasLayer3"]
+offset_left = 221.0
+offset_top = 82.0
+offset_right = 261.0
+offset_bottom = 122.0
+
+[node name="MouseSprite" type="Sprite2D" parent="CanvasLayer3/Mouse"]
+position = Vector2(103, -25)
+scale = Vector2(0.569745, 0.571086)
+texture = ExtResource("11_qqu50")
+
+[node name="Keyboard" type="HBoxContainer" parent="CanvasLayer3"]
+offset_left = 256.0
+offset_top = 86.0
+offset_right = 296.0
+offset_bottom = 126.0
+
+[node name="KeyboardSprite" type="Sprite2D" parent="CanvasLayer3/Keyboard"]
+position = Vector2(69, 71)
+scale = Vector2(0.50554, 0.589606)
+texture = ExtResource("12_t3b3l")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="player_hitbox" to="." method="_on_player_hitbox_area_entered"]

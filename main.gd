@@ -3,6 +3,8 @@ var restart = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$ControlLabel.show()
+	$ControlTimer.start()
 	$AudioStreamPlayer2D.play()
 	hide_restart_ui()
 	pass # Replace with function body.
@@ -76,4 +78,9 @@ func _on_yes_button_pressed() -> void:
 
 func _on_no_button_pressed() -> void:
 	get_tree().quit()
+	pass # Replace with function body.
+
+
+func _on_control_timer_timeout() -> void:
+	$ControlLabel.hide()
 	pass # Replace with function body.

@@ -152,9 +152,20 @@ text = "No"
 [node name="ResetMarker" type="Marker2D" parent="."]
 position = Vector2(85, -20)
 
+[node name="ControlLabel" type="Label" parent="."]
+offset_left = 18.0
+offset_top = -158.0
+offset_right = 178.0
+offset_bottom = -135.0
+text = "Hold tab for controls"
+
+[node name="ControlTimer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="body_entered" from="TransitionArea" to="." method="_on_transition_area_body_entered"]
 [connection signal="body_entered" from="TransitionArea" to="Player" method="_on_transition_area_body_entered"]
 [connection signal="body_exited" from="TransitionArea" to="." method="_on_transition_area_body_exited"]
 [connection signal="body_exited" from="TransitionArea" to="Player" method="_on_transition_area_body_exited"]
 [connection signal="pressed" from="YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="timeout" from="ControlTimer" to="." method="_on_control_timer_timeout"]
